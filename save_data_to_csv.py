@@ -2,11 +2,11 @@ from alpha_vantage.timeseries import TimeSeries
 from pprint import pprint
 import json
 import argparse
+import os
 
 
 def save_dataset(symbol, time_window):
-    credentials = json.load(open('creds.json', 'r'))
-    api_key = credentials['av_api_key']
+    api_key = os.environ['api_key']
     print(symbol, time_window)
     ts = TimeSeries(key=api_key, output_format='pandas')
     if time_window == 'intraday':
