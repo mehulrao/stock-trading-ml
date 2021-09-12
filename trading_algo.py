@@ -1,6 +1,8 @@
 import numpy as np
 from keras.models import load_model
 from util import csv_to_dataset, history_points
+import matplotlib
+matplotlib.use('TkAgg')
 
 model = load_model('technical_model.h5')
 

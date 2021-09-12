@@ -9,6 +9,9 @@ np.random.seed(4)
 tf.random.set_seed(4)
 from util import csv_to_dataset, history_points
 
+import matplotlib
+matplotlib.use('TkAgg')
+
 
 # dataset
 
@@ -40,7 +43,8 @@ dense_input = Input(shape=(technical_indicators.shape[1],), name='tech_input')
 # the first branch operates on the first input
 x = LSTM(50, name='lstm_0')(lstm_input)
 x = Dropout(0.2, name='lstm_dropout_0')(x)
-x = Activation("relu", name='ltsm_relu_0')(x)
+x = Activation("relu", name='ltsm_relu_1')(x)
+x = Dropout(0.2, name='lstm_dropout_1')(x)
 lstm_branch = Model(inputs=lstm_input, outputs=x)
 
 # the second branch opreates on the second input
@@ -48,6 +52,7 @@ y = Dense(20, name='tech_dense_0')(dense_input)
 y = Activation("relu", name='tech_relu_0')(y)
 y = Dropout(0.2, name='tech_dropout_0')(y)
 y = Activation("relu", name='tech_relu_1')(y)
+y = Dropout(0.2, name='tech_dropout_1')(y)
 technical_indicators_branch = Model(inputs=dense_input, outputs=y)
 
 # combine the output of the two branches

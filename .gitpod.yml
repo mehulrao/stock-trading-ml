@@ -1,4 +1,5 @@
-image: gitpod/workspace-full-vnc
+image:
+  file: .gitpod.dockerfile
 
 # This will expose all necessary ports needed for your VNC image
 ports:
@@ -10,7 +11,10 @@ ports:
     onOpen: ignore
 
 tasks:
-  - init: pip install -r requirements.txt
+  - init: |
+      pip install -r requirements.txt
+      sudo apt-get update
+
 
 github:
   prebuilds:
