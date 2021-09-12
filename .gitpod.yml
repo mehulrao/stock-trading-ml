@@ -1,10 +1,9 @@
-image:
-  file: .gitpod.Dockerfile
+image: gitpod/workspace-python-tk
 
 # This will expose all necessary ports needed for your VNC image
 ports:
   - port: 6080
-    onOpen: open-preview
+    onOpen: open-browser
   - port: 5900
     onOpen: ignore
   - port: 35900
