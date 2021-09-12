@@ -41,8 +41,8 @@ def csv_to_dataset(csv_path):
         # note since we are using his[3] we are taking the SMA of the closing price
         sma = np.mean(his[:, 3])
         macd = calc_ema(his, 12) - calc_ema(his, 26)
-        technical_indicators.append(np.array([sma]))
-        # technical_indicators.append(np.array([sma,macd,]))
+        #technical_indicators.append(np.array([sma]))
+        technical_indicators.append(np.array([sma,macd,]))
 
     technical_indicators = np.array(technical_indicators)
 

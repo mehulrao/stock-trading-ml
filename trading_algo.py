@@ -4,7 +4,7 @@ from util import csv_to_dataset, history_points
 
 model = load_model('technical_model.h5')
 
-ohlcv_histories, technical_indicators, next_day_open_values, unscaled_y, y_normaliser = csv_to_dataset('MSFT_daily.csv')
+ohlcv_histories, technical_indicators, next_day_open_values, unscaled_y, y_normaliser = csv_to_dataset('SPY_daily.csv')
 
 test_split = 0.9
 n = int(ohlcv_histories.shape[0] * test_split)
@@ -34,7 +34,7 @@ for ohlcv, ind in zip(ohlcv_test[start: end], tech_ind_test[start: end]):
     normalised_price_today = ohlcv[-1][0]
     normalised_price_today = np.array([[normalised_price_today]])
     price_today = y_normaliser.inverse_transform(normalised_price_today)
-    predicted_price_tomorrow = np.squeeze(y_normaliser.inverse_transform(model.predict([[ohlcv], [ind]])))
+    predicted_price_tomorrow = np.squeeze(y_normaliser.inverse_transform(model.predict([np.array([ohlcv]), np.array([ind])])))
     delta = predicted_price_tomorrow - price_today
     if delta > thresh:
         buys.append((x, price_today[0][0]))
